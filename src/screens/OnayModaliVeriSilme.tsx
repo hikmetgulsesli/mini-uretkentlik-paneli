@@ -9,9 +9,29 @@
 
 import { useState } from "react";
 
-interface OnayModaliVeriSilmeProps {}
+interface OnayModaliVeriSilmeProps {
+  isOpen?: boolean;
+  title?: string;
+  description?: string;
+  confirmLabel?: string;
+  cancelLabel?: string;
+  onConfirm?: () => void;
+  onCancel?: () => void;
+}
 
 export function OnayModaliVeriSilme(props: OnayModaliVeriSilmeProps) {
+  const {
+    isOpen = true,
+    title = "Tüm Verileri Sil",
+    description = "Sayacı, notları ve geçmişi kalıcı olarak silmek istediğinize emin misiniz? Bu işlem geri alınamaz.",
+    confirmLabel = "Sil",
+    cancelLabel = "İptal",
+    onConfirm,
+    onCancel,
+  } = props;
+
+  if (!isOpen) return null;
+
   return (
     <>
       {/* Mock Background Content (Blurred out) */}
@@ -34,23 +54,31 @@ export function OnayModaliVeriSilme(props: OnayModaliVeriSilmeProps) {
       <span className="material-symbols-outlined text-error text-4xl" data-icon="error" style={{fontVariationSettings: "'FILL' 1"}}>error</span>
       </div>
       <h2 className="text-[1.5rem] leading-[1.2] font-headline font-bold text-on-surface tracking-tight">
-                          Tüm Verileri Sil
+                          {title}
                       </h2>
       </div>
       {/* Modal Body */}
       <div className="p-6 text-center">
       <p className="text-[0.875rem] leading-[1.5] text-on-surface-variant font-body px-4">
-                          Sayacı, notları ve geçmişi kalıcı olarak silmek istediğinize emin misiniz? Bu işlem geri alınamaz.
+                          {description}
                       </p>
       </div>
       {/* Modal Footer (Actions) */}
       <div className="p-6 pt-2 flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 justify-center">
-      <button className="w-full sm:w-auto px-6 py-3 rounded-lg font-label text-[0.875rem] font-medium text-primary bg-transparent hover:bg-surface-bright/50 transition-colors duration-200">
-                          İptal
+      <button
+        type="button"
+        onClick={onCancel}
+        className="w-full sm:w-auto px-6 py-3 rounded-lg font-label text-[0.875rem] font-medium text-primary bg-transparent hover:bg-surface-bright/50 transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary"
+      >
+                          {cancelLabel}
                       </button>
-      <button className="w-full sm:w-auto px-6 py-3 rounded-lg font-label text-[0.875rem] font-medium text-on-error bg-error hover:brightness-105 transition-all duration-200 shadow-sm flex items-center justify-center gap-2">
+      <button
+        type="button"
+        onClick={onConfirm}
+        className="w-full sm:w-auto px-6 py-3 rounded-lg font-label text-[0.875rem] font-medium text-on-error bg-error hover:brightness-105 transition-all duration-200 shadow-sm flex items-center justify-center gap-2 cursor-pointer focus-visible:ring-2 focus-visible:ring-error"
+      >
       <span className="material-symbols-outlined text-lg" data-icon="delete" style={{fontVariationSettings: "'FILL' 1"}}>delete</span>
-                          Sil
+                          {confirmLabel}
                       </button>
       </div>
       {/* Bottom decorative accent */}
