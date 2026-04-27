@@ -9,9 +9,13 @@
 
 import { useState } from "react";
 
-interface BosDurumTasarimiNotlarProps {}
+interface BosDurumTasarimiNotlarProps {
+  onCreateNote?: () => void;
+}
 
 export function BosDurumTasarimiNotlar(props: BosDurumTasarimiNotlarProps) {
+  const { onCreateNote } = props;
+
   return (
     <>
       {/* SideNavBar from JSON Blueprint */}
@@ -29,7 +33,11 @@ export function BosDurumTasarimiNotlar(props: BosDurumTasarimiNotlarProps) {
       </div>
       </div>
       {/* CTA */}
-      <button className="w-full bg-gradient-to-br from-[#2563eb] to-[#b4c5ff] text-[#00174b] font-bold rounded-lg py-3 px-4 flex items-center justify-center gap-2 hover:brightness-110 transition-all duration-300 shadow-[0_8px_16px_-6px_rgba(37,99,235,0.4)]">
+      <button
+        type="button"
+        onClick={onCreateNote}
+        className="w-full bg-gradient-to-br from-[#2563eb] to-[#b4c5ff] text-[#00174b] font-bold rounded-lg py-3 px-4 flex items-center justify-center gap-2 hover:brightness-110 transition-all duration-300 shadow-[0_8px_16px_-6px_rgba(37,99,235,0.4)] cursor-pointer focus-visible:ring-2 focus-visible:ring-primary"
+      >
       <span className="material-symbols-outlined text-[20px]">add</span>
                   Yeni Not
               </button>
@@ -98,7 +106,11 @@ export function BosDurumTasarimiNotlar(props: BosDurumTasarimiNotlarProps) {
                       Yeni bir not ekleyerek başlayabilirsiniz. Fikirlerinizi, görevlerinizi veya kısa hatırlatıcılarınızı burada toplayın.
                   </p>
       {/* Inline Action (Ghost Button matching Minimalist aesthetic) */}
-      <button className="group flex items-center gap-3 px-6 py-3 rounded-lg border border-outline-variant/20 text-primary hover:bg-surface-bright/20 hover:border-primary/40 transition-all duration-300">
+      <button
+        type="button"
+        onClick={onCreateNote}
+        className="group flex items-center gap-3 px-6 py-3 rounded-lg border border-outline-variant/20 text-primary hover:bg-surface-bright/20 hover:border-primary/40 transition-all duration-300 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary"
+      >
       <span className="material-symbols-outlined group-hover:scale-110 transition-transform duration-300">
                           edit_document
                       </span>
