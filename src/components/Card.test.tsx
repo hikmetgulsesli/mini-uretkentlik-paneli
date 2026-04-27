@@ -15,16 +15,16 @@ describe('Card', () => {
   });
 
   it('varsayılan classları içerir', () => {
-    render(<Card>İçerik</Card>);
-    const card = screen.getByText('İçerik').parentElement;
-    expect(card?.className).toContain('rounded-xl');
-    expect(card?.className).toContain('bg-surface-container');
-    expect(card?.className).toContain('p-6');
+    const { container } = render(<Card>İçerik</Card>);
+    const card = container.firstChild;
+    expect(card).toHaveClass('rounded-xl');
+    expect(card).toHaveClass('bg-surface-container');
+    expect(card).toHaveClass('p-6');
   });
 
   it('custom className ile genişletilebilir', () => {
-    render(<Card className="max-w-md">Genişletilmiş</Card>);
-    const card = screen.getByText('Genişletilmiş').parentElement;
-    expect(card?.className).toContain('max-w-md');
+    const { container } = render(<Card className="max-w-md">Genişletilmiş</Card>);
+    const card = container.firstChild;
+    expect(card).toHaveClass('max-w-md');
   });
 });

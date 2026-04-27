@@ -64,6 +64,7 @@ describe('ConfirmModal', () => {
     render(<ConfirmModal {...defaultProps} />);
     const modal = screen.getByRole('dialog');
     const titleId = modal.getAttribute('aria-labelledby');
-    expect(screen.getById(titleId!)).toHaveTextContent('Tüm Verileri Sil');
+    const titleElement = document.getElementById(titleId!);
+    expect(titleElement).toHaveTextContent('Tüm Verileri Sil');
   });
 });
