@@ -7,7 +7,7 @@
 // 3. Add onClick/onChange handlers to interactive elements
 // 4. Replace placeholder data with props/state
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { NoteItem } from "../components/NoteItem";
 import { ConfirmModal } from "../components/ConfirmModal";
 import { EmptyState } from "../components/EmptyState";
@@ -22,6 +22,7 @@ export function NotlarEkrani(props: NotlarEkraniProps) {
   const { notes, addNote, deleteNote, getFilteredNotes } = useNotes();
 
   const [noteInput, setNoteInput] = useState("");
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
 
@@ -51,7 +52,7 @@ export function NotlarEkrani(props: NotlarEkraniProps) {
 
   const handleCreateNote = () => {
     // Focus the textarea
-    const textarea = document.querySelector('textarea');
+    const textarea = textareaRef.current;
     textarea?.focus();
   };
 
@@ -156,7 +157,7 @@ export function NotlarEkrani(props: NotlarEkraniProps) {
       {/* Note Input Area */}
       <div className="mb-16">
       <div className="bg-surface-container-low rounded-[16px] p-2 relative group focus-within:bg-surface-container transition-colors duration-300">
-      <textarea
+      <textarea ref={textareaRef}
         value={noteInput}
         onChange={(e) => setNoteInput(e.target.value)}
         onKeyDown={(e) => {

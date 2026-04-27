@@ -63,18 +63,14 @@ export function useNotes(): UseNotesReturn {
   }, [setNotes]);
 
   const deleteNote = useCallback((id: string) => {
-    setNotes((prev) => {
-      const noteToDelete = prev.find((n) => n.id === id);
-      if (!noteToDelete) return prev;
+    // Find note outside state updater to avoid side effects inside React state updates
+    const noteToDelete = notes.find((n) => n.id === id);
+    if (!noteToDelete) return;
 
-      addHistoryEntry(
-        createHistoryEntry('note_deleted', 0, 'Not silindi'),
-      );
-      dispatchHistoryUpdate();
-
-      return prev.filter((n) => n.id !== id);
-    });
-  }, [setNotes]);
+    setNotes((prev) => prev.filter((n) => n.id !== id));
+    addHistoryEntry(createHistoryEntry('note_deleted', 0, 'Not silindi'));
+    dispatchHistoryUpdate();
+  }, [setNotes, notes]);
 
   const getFilteredNotes = useCallback((searchTerm: string): Note[] => {
     if (!searchTerm.trim()) return notes;
