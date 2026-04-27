@@ -1,0 +1,56 @@
+[
+  {
+    "screenId": "83f67ce213ac41e89472505b8977f44b",
+    "title": "Onay Modalı - Veri Silme",
+    "componentName": "OnayModaliVeriSilme",
+    "file": "src/screens/OnayModaliVeriSilme.tsx",
+    "buttons": 2,
+    "inputs": 0,
+    "links": 0
+  },
+  {
+    "screenId": "bda809c1f7234c9ca2550dee66ef09ec",
+    "title": "Ayarlar Ekranı",
+    "componentName": "AyarlarEkrani",
+    "file": "src/screens/AyarlarEkrani.tsx",
+    "buttons": 8,
+    "inputs": 1,
+    "links": 6
+  },
+  {
+    "screenId": "fca364de6e0241618c2c968a5a1395b9",
+    "title": "Boş Durum Tasarımı - Notlar",
+    "componentName": "BosDurumTasarimiNotlar",
+    "file": "src/screens/BosDurumTasarimiNotlar.tsx",
+    "buttons": 2,
+    "inputs": 0,
+    "links": 4
+  },
+  {
+    "screenId": "6bfe27b9a02d4a819d561ad172119573",
+    "title": "Geçmiş Ekranı",
+    "componentName": "GecmisEkrani",
+    "file": "src/screens/GecmisEkrani.tsx",
+    "buttons": 5,
+    "inputs": 0,
+    "links": 4
+  },
+  {
+    "screenId": "3a5c470f84b6492cb582fcd20e151c3a",
+    "title": "Sayaç Ekranı",
+    "componentName": "SayacEkrani",
+    "file": "src/screens/SayacEkrani.tsx",
+    "buttons": 6,
+    "inputs": 1,
+    "links": 4
+  },
+  {
+    "screenId": "70063960d7be4764a38676d69a16cdd9",
+    "title": "Notlar Ekranı",
+    "componentName": "NotlarEkrani",
+    "file": "src/screens/NotlarEkrani.tsx",
+    "buttons": 8,
+    "inputs": 1,
+    "links": 4
+  }
+]
