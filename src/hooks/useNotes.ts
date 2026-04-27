@@ -1,47 +1,18 @@
 import { useCallback } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { STORAGE_KEYS } from '../types';
-import type { HistoryEntry, Note } from '../types';
+import {
+  createHistoryEntry,
+  addHistoryEntry,
+  dispatchHistoryUpdate,
+} from '../utils/history';
+import type { Note } from '../types';
 
 export interface UseNotesReturn {
   notes: Note[];
   addNote: (content: string) => void;
   deleteNote: (id: string) => void;
   getFilteredNotes: (searchTerm: string) => Note[];
-}
-
-function createHistoryEntry(
-  type: 'note_added' | 'note_deleted',
-  value: number,
-  description: string,
-): HistoryEntry {
-  return {
-    id: crypto.randomUUID(),
-    type,
-    value,
-    description,
-    timestamp: new Date().toISOString(),
-  };
-}
-
-function addHistoryEntry(entry: HistoryEntry): void {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEYS.HISTORY);
-    const entries: HistoryEntry[] = stored ? JSON.parse(stored) : [];
-    entries.unshift(entry);
-    const trimmed = entries.slice(0, 100);
-    localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(trimmed));
-  } catch {
-    // Silently fail if storage is full or unavailable
-  }
-}
-
-function dispatchHistoryUpdate(): void {
-  try {
-    window.dispatchEvent(new Event('history-update'));
-  } catch {
-    // Ignore if window is not available (e.g. SSR)
-  }
 }
 
 export function useNotes(): UseNotesReturn {

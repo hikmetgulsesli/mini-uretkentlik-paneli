@@ -1,3 +1,4 @@
+import { Trash2 } from 'lucide-react';
 import { formatTurkishDateTime } from '../utils/formatters';
 import type { Note } from '../types';
 
@@ -16,7 +17,7 @@ export function NoteItem({ note, onDelete, isLarge = false }: NoteItemProps) {
     >
       <div className="absolute top-0 left-0 w-1 h-full bg-secondary/50 blur-[2px]"></div>
       <div>
-        <p className="text-on-surface text-[1.125rem] leading-[1.6] font-body line-clamp-4 mb-8">
+        <p className="text-on-surface text-[1.125rem] leading-[1.6] font-body line-clamp-3 mb-8">
           {note.content}
         </p>
       </div>
@@ -30,9 +31,7 @@ export function NoteItem({ note, onDelete, isLarge = false }: NoteItemProps) {
           className="text-on-surface-variant hover:text-error hover:bg-surface-bright rounded-full p-2 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 cursor-pointer"
           aria-label="Notu sil"
         >
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
-            delete
-          </span>
+          <Trash2 size={20} aria-hidden="true" />
         </button>
       </div>
     </div>

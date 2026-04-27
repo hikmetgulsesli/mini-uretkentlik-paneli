@@ -9,7 +9,6 @@
 
 import { useState, useRef } from "react";
 import { NoteItem } from "../components/NoteItem";
-import { ConfirmModal } from "../components/ConfirmModal";
 import { EmptyState } from "../components/EmptyState";
 import { useNotes } from "../hooks/useNotes";
 
@@ -19,14 +18,10 @@ interface NotlarEkraniProps {
 
 export function NotlarEkrani(props: NotlarEkraniProps) {
   const { onNavigate } = props;
-  const { addNote, deleteNote, getFilteredNotes } = useNotes();
+  const { notes, addNote, deleteNote } = useNotes();
 
   const [noteInput, setNoteInput] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
-
-  const filteredNotes = getFilteredNotes(searchTerm);
 
   const handleAddNote = () => {
     if (noteInput.trim()) {
@@ -36,18 +31,7 @@ export function NotlarEkrani(props: NotlarEkraniProps) {
   };
 
   const handleDeleteNote = (id: string) => {
-    setDeleteConfirmId(id);
-  };
-
-  const handleConfirmDelete = () => {
-    if (deleteConfirmId) {
-      deleteNote(deleteConfirmId);
-      setDeleteConfirmId(null);
-    }
-  };
-
-  const handleCancelDelete = () => {
-    setDeleteConfirmId(null);
+    deleteNote(id);
   };
 
   const handleCreateNote = () => {
@@ -123,30 +107,8 @@ export function NotlarEkrani(props: NotlarEkraniProps) {
       </nav>
       {/* TopNavBar */}
       <header className="flex justify-between items-center w-full pl-[300px] pr-8 h-16 fixed top-0 z-40 bg-[#0b1326]/60 backdrop-blur-xl font-['Inter'] text-sm font-medium">
-      {/* Search Bar (on_left) */}
-      <div className="flex items-center flex-1">
-      <div className="relative w-64 group">
-      <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors text-[18px]">search</span>
-      <input
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full bg-surface-container-lowest text-on-surface placeholder:text-slate-400 rounded-full pl-10 pr-4 py-2 border border-outline-variant/20 focus:border-primary focus:outline-none focus:ring-0 transition-colors"
-        placeholder="Ara..."
-        type="text"
-        aria-label="Notları ara"
-      />
-      </div>
-      </div>
+      <div className="flex-1" />
       <div className="hidden text-lg font-black tracking-tighter text-[#b4c5ff]">Panel</div>
-      {/* Trailing Icons */}
-      <div className="flex items-center gap-2">
-      <button type="button" aria-label="Bildirimler" className="text-slate-400 hover:text-[#b4c5ff] hover:bg-[#222a3d]/40 rounded-full p-2 transition-all cursor-pointer">
-      <span className="material-symbols-outlined" data-icon="notifications">notifications</span>
-      </button>
-      <button type="button" aria-label="Profil" className="text-slate-400 hover:text-[#b4c5ff] hover:bg-[#222a3d]/40 rounded-full p-2 transition-all cursor-pointer">
-      <span className="material-symbols-outlined" data-icon="account_circle">account_circle</span>
-      </button>
-      </div>
       </header>
       {/* Main Canvas */}
       <main className="flex-1 ml-[288px] pt-24 px-12 pb-16 relative z-10">
@@ -185,12 +147,7 @@ export function NotlarEkrani(props: NotlarEkraniProps) {
       </div>
       </div>
       {/* Notes Grid (Bento Style) */}
-      {filteredNotes.length === 0 ? (
-        searchTerm ? (
-          <div className="text-center py-16">
-            <p className="text-on-surface-variant text-lg">Arama sonucu bulunamadı.</p>
-          </div>
-        ) : (
+      {notes.length === 0 ? (
           <EmptyState
             icon="sticky_note_2"
             message="Henüz not eklenmemiş."
@@ -199,10 +156,9 @@ export function NotlarEkrani(props: NotlarEkraniProps) {
             actionIcon="edit_document"
             onAction={handleCreateNote}
           />
-        )
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 auto-rows-min">
-          {filteredNotes.map((note, index) => (
+          {notes.map((note, index) => (
             <NoteItem
               key={note.id}
               note={note}
@@ -213,19 +169,6 @@ export function NotlarEkrani(props: NotlarEkraniProps) {
         </div>
       )}
       </main>
-
-      {/* Delete Confirmation Modal */}
-      <ConfirmModal
-        isOpen={deleteConfirmId !== null}
-        title="Notu Sil"
-        description="Bu notu silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
-        confirmLabel="Sil"
-        cancelLabel="İptal"
-        iconName="error"
-        confirmIconName="delete"
-        onConfirm={handleConfirmDelete}
-        onCancel={handleCancelDelete}
-      />
     </>
   );
 }
