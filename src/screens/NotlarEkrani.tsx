@@ -7,7 +7,7 @@
 // 3. Add onClick/onChange handlers to interactive elements
 // 4. Replace placeholder data with props/state
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { STORAGE_KEYS } from '../types';
 import { formatTurkishDateTime } from '../utils/formatters';
@@ -20,6 +20,7 @@ interface NotlarEkraniProps {
 export function NotlarEkrani({ onNavigate }: NotlarEkraniProps) {
   const [notes, setNotes] = useLocalStorage<Note[]>(STORAGE_KEYS.NOTES, []);
   const [newNote, setNewNote] = useState('');
+  const noteInputRef = useRef<HTMLTextAreaElement>(null);
 
   const handleAddNote = () => {
     if (!newNote.trim()) return;
@@ -91,8 +92,8 @@ export function NotlarEkrani({ onNavigate }: NotlarEkraniProps) {
         <button
           type="button"
           onClick={() => {
-            const el = document.getElementById('note-input');
-            el?.focus();
+            // Use ref for focus management
+            noteInputRef.current?.focus();
           }}
           className="w-full mt-4 py-3 px-4 bg-gradient-to-br from-primary-container to-primary text-on-primary-container font-medium rounded-lg flex justify-center items-center gap-2 hover:brightness-110 transition-all shadow-[0_4px_24px_-4px_rgba(6,14,32,0.4)] cursor-pointer"
         >
@@ -131,6 +132,7 @@ export function NotlarEkrani({ onNavigate }: NotlarEkraniProps) {
           <div className="bg-surface-container-low rounded-[16px] p-2 relative group focus-within:bg-surface-container transition-colors duration-300">
             <textarea
               id="note-input"
+              ref={noteInputRef}
               className="w-full bg-transparent text-on-surface placeholder:text-on-surface-variant/60 text-[1rem] leading-[1.5] border-none focus:ring-0 resize-none p-4 font-body outline-none"
               placeholder="Notunuzu yazın..."
               rows={3}

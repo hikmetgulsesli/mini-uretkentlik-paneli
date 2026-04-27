@@ -29,7 +29,6 @@ function addHistoryEntry(entry: HistoryEntry): void {
     const stored = localStorage.getItem(STORAGE_KEYS.HISTORY);
     const entries: HistoryEntry[] = stored ? JSON.parse(stored) : [];
     entries.unshift(entry);
-    // Keep only last 100 entries to prevent storage bloat
     const trimmed = entries.slice(0, 100);
     localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(trimmed));
   } catch {
@@ -49,22 +48,18 @@ export function useCounter(): UseCounterReturn {
   const [value, setValue] = useLocalStorage<number>(STORAGE_KEYS.COUNTER, 0);
 
   const increment = useCallback(() => {
-    setValue((prev) => {
-      const next = prev + 1;
-      addHistoryEntry(createHistoryEntry('increment', next, 'Sayaç artırıldı'));
-      dispatchHistoryUpdate();
-      return next;
-    });
-  }, [setValue]);
+    const next = value + 1;
+    setValue(next);
+    addHistoryEntry(createHistoryEntry('increment', next, 'Sayaç artırıldı'));
+    dispatchHistoryUpdate();
+  }, [setValue, value]);
 
   const decrement = useCallback(() => {
-    setValue((prev) => {
-      const next = prev - 1;
-      addHistoryEntry(createHistoryEntry('decrement', next, 'Sayaç azaltıldı'));
-      dispatchHistoryUpdate();
-      return next;
-    });
-  }, [setValue]);
+    const next = value - 1;
+    setValue(next);
+    addHistoryEntry(createHistoryEntry('decrement', next, 'Sayaç azaltıldı'));
+    dispatchHistoryUpdate();
+  }, [setValue, value]);
 
   const reset = useCallback(() => {
     setValue(0);
