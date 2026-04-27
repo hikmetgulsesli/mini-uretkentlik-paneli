@@ -1,0 +1,730 @@
+[
+  {
+    "screenId": "83f67ce213ac41e89472505b8977f44b",
+    "screenTitle": "Onay Modalı - Veri Silme",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "button",
+        "label": "İptal",
+        "line": 114
+      },
+      {
+        "type": "button",
+        "label": "Sil",
+        "line": 117
+      }
+    ],
+    "navigation": [],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "İptal",
+        "line": 114
+      },
+      {
+        "type": "button",
+        "label": "Sil",
+        "line": 117
+      }
+    ],
+    "inputs": [],
+    "hardcodedData": [],
+    "totalInteractive": 2,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "bda809c1f7234c9ca2550dee66ef09ec",
+    "screenTitle": "Ayarlar Ekranı",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Sayaç",
+        "href": "#",
+        "line": 109
+      },
+      {
+        "type": "link",
+        "label": "Notlar",
+        "href": "#",
+        "line": 114
+      },
+      {
+        "type": "link",
+        "label": "Geçmiş",
+        "href": "#",
+        "line": 119
+      },
+      {
+        "type": "link",
+        "label": "Ayarlar",
+        "href": "#",
+        "line": 124
+      },
+      {
+        "type": "link",
+        "label": "Sürüm Notları",
+        "href": "#",
+        "line": 222
+      },
+      {
+        "type": "link",
+        "label": "Gizlilik Politikası",
+        "href": "#",
+        "line": 223
+      },
+      {
+        "type": "button",
+        "label": "Yeni Not",
+        "line": 102
+      },
+      {
+        "type": "button",
+        "label": "menu",
+        "line": 150
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 156
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 159
+      },
+      {
+        "type": "button",
+        "label": "Açık Mod",
+        "line": 187
+      },
+      {
+        "type": "button",
+        "label": "Karanlık Mod",
+        "line": 191
+      },
+      {
+        "type": "button",
+        "label": "Sistem",
+        "line": 195
+      },
+      {
+        "type": "button",
+        "label": "Tüm Verileri Temizle",
+        "line": 243
+      },
+      {
+        "type": "input",
+        "label": "Ara...",
+        "inputType": "text",
+        "placeholder": "Ara...",
+        "line": 147
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Sayaç",
+        "href": "#",
+        "line": 109
+      },
+      {
+        "type": "link",
+        "label": "Notlar",
+        "href": "#",
+        "line": 114
+      },
+      {
+        "type": "link",
+        "label": "Geçmiş",
+        "href": "#",
+        "line": 119
+      },
+      {
+        "type": "link",
+        "label": "Ayarlar",
+        "href": "#",
+        "line": 124
+      },
+      {
+        "type": "link",
+        "label": "Sürüm Notları",
+        "href": "#",
+        "line": 222
+      },
+      {
+        "type": "link",
+        "label": "Gizlilik Politikası",
+        "href": "#",
+        "line": 223
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "Yeni Not",
+        "line": 102
+      },
+      {
+        "type": "button",
+        "label": "menu",
+        "line": 150
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 156
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 159
+      },
+      {
+        "type": "button",
+        "label": "Açık Mod",
+        "line": 187
+      },
+      {
+        "type": "button",
+        "label": "Karanlık Mod",
+        "line": 191
+      },
+      {
+        "type": "button",
+        "label": "Sistem",
+        "line": 195
+      },
+      {
+        "type": "button",
+        "label": "Tüm Verileri Temizle",
+        "line": 243
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "Ara...",
+        "inputType": "text",
+        "placeholder": "Ara...",
+        "line": 147
+      }
+    ],
+    "hardcodedData": [],
+    "totalInteractive": 15,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "fca364de6e0241618c2c968a5a1395b9",
+    "screenTitle": "Boş Durum Tasarımı - Notlar",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Sayaç",
+        "href": "#",
+        "line": 127
+      },
+      {
+        "type": "link",
+        "label": "Notlar",
+        "href": "#",
+        "line": 132
+      },
+      {
+        "type": "link",
+        "label": "Geçmiş",
+        "href": "#",
+        "line": 137
+      },
+      {
+        "type": "link",
+        "label": "Ayarlar",
+        "href": "#",
+        "line": 142
+      },
+      {
+        "type": "button",
+        "label": "Yeni Not",
+        "line": 120
+      },
+      {
+        "type": "button",
+        "label": "İlk Notunu Oluştur",
+        "line": 189
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Sayaç",
+        "href": "#",
+        "line": 127
+      },
+      {
+        "type": "link",
+        "label": "Notlar",
+        "href": "#",
+        "line": 132
+      },
+      {
+        "type": "link",
+        "label": "Geçmiş",
+        "href": "#",
+        "line": 137
+      },
+      {
+        "type": "link",
+        "label": "Ayarlar",
+        "href": "#",
+        "line": 142
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "Yeni Not",
+        "line": 120
+      },
+      {
+        "type": "button",
+        "label": "İlk Notunu Oluştur",
+        "line": 189
+      }
+    ],
+    "inputs": [],
+    "hardcodedData": [],
+    "totalInteractive": 6,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "6bfe27b9a02d4a819d561ad172119573",
+    "screenTitle": "Geçmiş Ekranı",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Sayaç",
+        "href": "#",
+        "line": 115
+      },
+      {
+        "type": "link",
+        "label": "Notlar",
+        "href": "#",
+        "line": 120
+      },
+      {
+        "type": "link",
+        "label": "Geçmiş",
+        "href": "#",
+        "line": 125
+      },
+      {
+        "type": "link",
+        "label": "Ayarlar",
+        "href": "#",
+        "line": 130
+      },
+      {
+        "type": "button",
+        "label": "Yeni Not",
+        "line": 136
+      },
+      {
+        "type": "button",
+        "label": "search",
+        "line": 145
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 150
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 153
+      },
+      {
+        "type": "button",
+        "label": "Geçmişi Temizle",
+        "line": 166
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Sayaç",
+        "href": "#",
+        "line": 115
+      },
+      {
+        "type": "link",
+        "label": "Notlar",
+        "href": "#",
+        "line": 120
+      },
+      {
+        "type": "link",
+        "label": "Geçmiş",
+        "href": "#",
+        "line": 125
+      },
+      {
+        "type": "link",
+        "label": "Ayarlar",
+        "href": "#",
+        "line": 130
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "Yeni Not",
+        "line": 136
+      },
+      {
+        "type": "button",
+        "label": "search",
+        "line": 145
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 150
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 153
+      },
+      {
+        "type": "button",
+        "label": "Geçmişi Temizle",
+        "line": 166
+      }
+    ],
+    "inputs": [],
+    "hardcodedData": [],
+    "totalInteractive": 9,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "3a5c470f84b6492cb582fcd20e151c3a",
+    "screenTitle": "Sayaç Ekranı",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Sayaç",
+        "href": "#",
+        "line": 108
+      },
+      {
+        "type": "link",
+        "label": "Notlar",
+        "href": "#",
+        "line": 112
+      },
+      {
+        "type": "link",
+        "label": "Geçmiş",
+        "href": "#",
+        "line": 116
+      },
+      {
+        "type": "link",
+        "label": "Ayarlar",
+        "href": "#",
+        "line": 120
+      },
+      {
+        "type": "button",
+        "label": "Yeni Not",
+        "line": 101
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 145
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 148
+      },
+      {
+        "type": "button",
+        "label": "remove",
+        "line": 172
+      },
+      {
+        "type": "button",
+        "label": "add",
+        "line": 175
+      },
+      {
+        "type": "button",
+        "label": "Sıfırla",
+        "line": 182
+      },
+      {
+        "type": "input",
+        "label": "Ara...",
+        "inputType": "text",
+        "placeholder": "Ara...",
+        "line": 141
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Sayaç",
+        "href": "#",
+        "line": 108
+      },
+      {
+        "type": "link",
+        "label": "Notlar",
+        "href": "#",
+        "line": 112
+      },
+      {
+        "type": "link",
+        "label": "Geçmiş",
+        "href": "#",
+        "line": 116
+      },
+      {
+        "type": "link",
+        "label": "Ayarlar",
+        "href": "#",
+        "line": 120
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "Yeni Not",
+        "line": 101
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 145
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 148
+      },
+      {
+        "type": "button",
+        "label": "remove",
+        "line": 172
+      },
+      {
+        "type": "button",
+        "label": "add",
+        "line": 175
+      },
+      {
+        "type": "button",
+        "label": "Sıfırla",
+        "line": 182
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "Ara...",
+        "inputType": "text",
+        "placeholder": "Ara...",
+        "line": 141
+      }
+    ],
+    "hardcodedData": [],
+    "totalInteractive": 11,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "70063960d7be4764a38676d69a16cdd9",
+    "screenTitle": "Notlar Ekranı",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Sayaç",
+        "href": "#",
+        "line": 111
+      },
+      {
+        "type": "link",
+        "label": "Notlar",
+        "href": "#",
+        "line": 116
+      },
+      {
+        "type": "link",
+        "label": "Geçmiş",
+        "href": "#",
+        "line": 121
+      },
+      {
+        "type": "link",
+        "label": "Ayarlar",
+        "href": "#",
+        "line": 126
+      },
+      {
+        "type": "button",
+        "label": "Yeni Not",
+        "line": 132
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 149
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 152
+      },
+      {
+        "type": "button",
+        "label": "Ekle",
+        "line": 168
+      },
+      {
+        "type": "button",
+        "label": "delete",
+        "line": 187
+      },
+      {
+        "type": "button",
+        "label": "delete",
+        "line": 201
+      },
+      {
+        "type": "button",
+        "label": "delete",
+        "line": 215
+      },
+      {
+        "type": "button",
+        "label": "delete",
+        "line": 229
+      },
+      {
+        "type": "input",
+        "label": "Ara...",
+        "inputType": "text",
+        "placeholder": "Ara...",
+        "line": 143
+      },
+      {
+        "type": "input",
+        "label": "Notunuzu yazın...",
+        "inputType": "textarea",
+        "placeholder": "Notunuzu yazın...",
+        "line": 166
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Sayaç",
+        "href": "#",
+        "line": 111
+      },
+      {
+        "type": "link",
+        "label": "Notlar",
+        "href": "#",
+        "line": 116
+      },
+      {
+        "type": "link",
+        "label": "Geçmiş",
+        "href": "#",
+        "line": 121
+      },
+      {
+        "type": "link",
+        "label": "Ayarlar",
+        "href": "#",
+        "line": 126
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "Yeni Not",
+        "line": 132
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 149
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 152
+      },
+      {
+        "type": "button",
+        "label": "Ekle",
+        "line": 168
+      },
+      {
+        "type": "button",
+        "label": "delete",
+        "line": 187
+      },
+      {
+        "type": "button",
+        "label": "delete",
+        "line": 201
+      },
+      {
+        "type": "button",
+        "label": "delete",
+        "line": 215
+      },
+      {
+        "type": "button",
+        "label": "delete",
+        "line": 229
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "Ara...",
+        "inputType": "text",
+        "placeholder": "Ara...",
+        "line": 143
+      },
+      {
+        "type": "input",
+        "label": "Notunuzu yazın...",
+        "inputType": "textarea",
+        "placeholder": "Notunuzu yazın...",
+        "line": 166
+      }
+    ],
+    "hardcodedData": [],
+    "totalInteractive": 14,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  }
+]
