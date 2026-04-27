@@ -26,6 +26,7 @@ export function NoteItem({ note, onDelete, isLarge = false }: NoteItemProps) {
         </span>
         <button
           onClick={() => onDelete(note.id)}
+          type="button"
           className="text-on-surface-variant hover:text-error hover:bg-surface-bright rounded-full p-2 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 cursor-pointer"
           aria-label="Notu sil"
         >

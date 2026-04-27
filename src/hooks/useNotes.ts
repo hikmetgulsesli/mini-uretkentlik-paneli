@@ -74,9 +74,9 @@ export function useNotes(): UseNotesReturn {
 
   const getFilteredNotes = useCallback((searchTerm: string): Note[] => {
     if (!searchTerm.trim()) return notes;
-    const term = searchTerm.toLowerCase();
+    const term = searchTerm.toLocaleLowerCase('tr-TR');
     return notes.filter((note) =>
-      note.content.toLowerCase().includes(term),
+      note.content.toLocaleLowerCase('tr-TR').includes(term),
     );
   }, [notes]);
 

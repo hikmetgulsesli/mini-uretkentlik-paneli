@@ -19,7 +19,7 @@ interface NotlarEkraniProps {
 
 export function NotlarEkrani(props: NotlarEkraniProps) {
   const { onNavigate } = props;
-  const { notes, addNote, deleteNote, getFilteredNotes } = useNotes();
+  const { addNote, deleteNote, getFilteredNotes } = useNotes();
 
   const [noteInput, setNoteInput] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -90,7 +90,7 @@ export function NotlarEkrani(props: NotlarEkraniProps) {
       {/* Tab 2: Notlar (Active) */}
       <button
         onClick={() => onNavigate?.('notes')}
-        className="flex items-center gap-3 px-4 py-3 bg-[#222a3d] text-[#b4c5ff] rounded-lg transition-all duration-300 scale-[0.98] transition-transform duration-200 cursor-pointer bg-transparent border-none text-left w-full"
+        className="flex items-center gap-3 px-4 py-3 bg-[#222a3d] text-[#b4c5ff] rounded-lg transition-all duration-300 scale-[0.98] transition-transform duration-200 cursor-pointer border-none text-left w-full"
       >
       <span className="material-symbols-outlined text-[20px]" data-icon="description" data-weight="fill" style={{fontVariationSettings: "'FILL' 1"}}>description</span>
       <span className="font-bold">Notlar</span>
@@ -140,10 +140,10 @@ export function NotlarEkrani(props: NotlarEkraniProps) {
       <div className="hidden text-lg font-black tracking-tighter text-[#b4c5ff]">Panel</div>
       {/* Trailing Icons */}
       <div className="flex items-center gap-2">
-      <button className="text-slate-400 hover:text-[#b4c5ff] hover:bg-[#222a3d]/40 rounded-full p-2 transition-all cursor-pointer">
+      <button type="button" aria-label="Bildirimler" className="text-slate-400 hover:text-[#b4c5ff] hover:bg-[#222a3d]/40 rounded-full p-2 transition-all cursor-pointer">
       <span className="material-symbols-outlined" data-icon="notifications">notifications</span>
       </button>
-      <button className="text-slate-400 hover:text-[#b4c5ff] hover:bg-[#222a3d]/40 rounded-full p-2 transition-all cursor-pointer">
+      <button type="button" aria-label="Profil" className="text-slate-400 hover:text-[#b4c5ff] hover:bg-[#222a3d]/40 rounded-full p-2 transition-all cursor-pointer">
       <span className="material-symbols-outlined" data-icon="account_circle">account_circle</span>
       </button>
       </div>
@@ -174,6 +174,7 @@ export function NotlarEkrani(props: NotlarEkraniProps) {
       <div className="flex justify-end p-2 mt-2">
       <button
         onClick={handleAddNote}
+        type="button"
         disabled={!noteInput.trim()}
         className="bg-gradient-to-br from-primary-container to-primary text-on-primary-container rounded-lg px-6 py-2.5 font-medium flex items-center gap-2 hover:brightness-110 transition-all shadow-[0_4px_24px_-4px_rgba(6,14,32,0.4)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
       >
