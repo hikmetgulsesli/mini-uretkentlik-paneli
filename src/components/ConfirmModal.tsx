@@ -6,6 +6,8 @@ interface ConfirmModalProps {
   description: string;
   confirmLabel?: string;
   cancelLabel?: string;
+  iconName?: string;
+  confirmIconName?: string;
   onConfirm: () => void;
   onCancel: () => void;
 }
@@ -16,29 +18,71 @@ export function ConfirmModal({
   description,
   confirmLabel = 'Sil',
   cancelLabel = 'İptal',
+  iconName = 'error',
+  confirmIconName = 'delete',
   onConfirm,
   onCancel,
 }: ConfirmModalProps) {
   const confirmButtonRef = useRef<HTMLButtonElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const hasFocusedRef = useRef(false);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) {
+      hasFocusedRef.current = false;
+      return;
+    }
+
+    // Store previously focused element to restore later
+    previouslyFocusedRef.current = document.activeElement as HTMLElement;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onCancel();
       }
+
+      // Focus trap: keep Tab cycling inside the modal
+      if (e.key === 'Tab' && overlayRef.current) {
+        const focusable = overlayRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const focusableList = Array.from(focusable).filter(
+          (el) => !("disabled" in el && (el as { disabled?: boolean }).disabled) && el.offsetParent !== null
+        );
+        if (focusableList.length === 0) return;
+
+        const first = focusableList[0];
+        const last = focusableList[focusableList.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
     };
 
     document.addEventListener('keydown', handleKeyDown);
-    // Focus trap: focus confirm button on open
-    setTimeout(() => {
-      confirmButtonRef.current?.focus();
-    }, 0);
+
+    // Focus confirm button only on first open
+    if (!hasFocusedRef.current) {
+      hasFocusedRef.current = true;
+      setTimeout(() => {
+        confirmButtonRef.current?.focus();
+      }, 0);
+    }
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      // Restore previous focus when modal closes
+      previouslyFocusedRef.current?.focus();
     };
   }, [isOpen, onCancel]);
 
@@ -58,7 +102,7 @@ export function ConfirmModal({
         }
       }}
     >
-      <div className="w-full max-w-md bg-surface-container-low rounded-[16px] shadow-[0_24px_48px_-12px_rgba(6,14,32,0.4)] relative overflow-hidden ring-1 ring-outline-variant/20">
+      <div className="w-full max-w-md bg-surface-container-low rounded-2xl shadow-[0_24px_48px_-12px_rgba(6,14,32,0.4)] relative overflow-hidden ring-1 ring-outline-variant/20">
         {/* Modal Header */}
         <div className="p-6 pb-0 flex flex-col items-center text-center space-y-4">
           <div className="w-16 h-16 rounded-full bg-error-container/20 flex items-center justify-center mb-2">
@@ -67,12 +111,12 @@ export function ConfirmModal({
               aria-hidden="true"
               style={{ fontVariationSettings: "'FILL' 1" }}
             >
-              error
+              {iconName}
             </span>
           </div>
           <h2
             id="confirm-modal-title"
-            className="text-[1.5rem] leading-[1.2] font-bold text-on-surface tracking-tight"
+            className="text-2xl leading-tight font-bold text-on-surface tracking-tight"
           >
             {title}
           </h2>
@@ -82,7 +126,7 @@ export function ConfirmModal({
         <div className="p-6 text-center">
           <p
             id="confirm-modal-desc"
-            className="text-[0.875rem] leading-[1.5] text-on-surface-variant px-4"
+            className="text-sm leading-relaxed text-on-surface-variant px-4"
           >
             {description}
           </p>
@@ -93,7 +137,7 @@ export function ConfirmModal({
           <button
             type="button"
             onClick={onCancel}
-            className="w-full sm:w-auto px-6 py-3 rounded-lg text-[0.875rem] font-medium text-primary bg-transparent hover:bg-surface-bright/50 transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary"
+            className="w-full sm:w-auto px-6 py-3 rounded-lg text-sm font-medium text-primary bg-transparent hover:bg-surface-bright/50 transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary"
           >
             {cancelLabel}
           </button>
@@ -101,14 +145,14 @@ export function ConfirmModal({
             ref={confirmButtonRef}
             type="button"
             onClick={onConfirm}
-            className="w-full sm:w-auto px-6 py-3 rounded-lg text-[0.875rem] font-medium text-on-error bg-error hover:brightness-105 transition-all duration-200 shadow-sm flex items-center justify-center gap-2 cursor-pointer focus-visible:ring-2 focus-visible:ring-error"
+            className="w-full sm:w-auto px-6 py-3 rounded-lg text-sm font-medium text-on-error bg-error hover:brightness-105 transition-all duration-200 shadow-sm flex items-center justify-center gap-2 cursor-pointer focus-visible:ring-2 focus-visible:ring-error"
           >
             <span
               className="material-symbols-outlined text-lg"
               aria-hidden="true"
               style={{ fontVariationSettings: "'FILL' 1" }}
             >
-              delete
+              {confirmIconName}
             </span>
             {confirmLabel}
           </button>

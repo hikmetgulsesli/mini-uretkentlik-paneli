@@ -49,7 +49,7 @@ export function Button({
         'inline-flex items-center justify-center gap-2 rounded-lg font-medium',
         'transition-all duration-200',
         'disabled:opacity-50 disabled:cursor-not-allowed',
-        'cursor-pointer',
+        'enabled:cursor-pointer',
         variantClasses[variant],
         sizeClasses[size],
         className,
