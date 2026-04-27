@@ -1,31 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
+import { getStorageItem, setStorageItem } from '../utils/storage';
 
 export function useLocalStorage<T>(
   key: string,
   initialValue: T,
 ): [T, React.Dispatch<React.SetStateAction<T>>] {
   const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      const item = window.localStorage.getItem(key);
-      if (item) {
-        return JSON.parse(item) as T;
-      }
-      return initialValue;
-    } catch (error) {
-      console.error(`useLocalStorage başlatma hatası ("${key}"):`, error);
-      return initialValue;
-    }
+    const item = getStorageItem<T>(key);
+    return item !== null ? item : initialValue;
   });
 
   const setValue: React.Dispatch<React.SetStateAction<T>> = useCallback(
     (value) => {
       setStoredValue((prev) => {
         const nextValue = value instanceof Function ? value(prev) : value;
-        try {
-          window.localStorage.setItem(key, JSON.stringify(nextValue));
-        } catch (error) {
-          console.error(`useLocalStorage yazma hatası ("${key}"):`, error);
-        }
+        setStorageItem(key, nextValue);
         return nextValue;
       });
     },
@@ -34,12 +23,17 @@ export function useLocalStorage<T>(
 
   useEffect(() => {
     const handleStorageChange = (event: StorageEvent) => {
-      if (event.key === key && event.newValue !== null) {
-        try {
-          setStoredValue(JSON.parse(event.newValue) as T);
-        } catch (error) {
-          console.error(`useLocalStorage depolama olayı hatası ("${key}"):`, error);
-        }
+      if (event.key !== key) {
+        return;
+      }
+      if (event.newValue === null) {
+        setStoredValue(initialValue);
+        return;
+      }
+      try {
+        setStoredValue(JSON.parse(event.newValue) as T);
+      } catch {
+        // Invalid JSON in storage, keep current state
       }
     };
 
@@ -47,7 +41,7 @@ export function useLocalStorage<T>(
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
-  }, [key]);
+  }, [key, initialValue]);
 
   return [storedValue, setValue];
 }
