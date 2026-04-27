@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mini Üretkenlik Paneli - Notlar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "surface-bright": "#31394d",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-secondary-fixed-variant": "#005236",
+                        "tertiary-container": "#996100",
+                        "surface-container": "#171f33",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "tertiary": "#ffb95f",
+                        "outline": "#8d90a0",
+                        "on-secondary-fixed": "#002113",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#472a00",
+                        "primary-container": "#2563eb",
+                        "surface": "#0b1326",
+                        "surface-dim": "#0b1326",
+                        "surface-container-low": "#131b2e",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "background": "#0b1326",
+                        "primary": "#b4c5ff",
+                        "secondary": "#4edea3",
+                        "on-background": "#dae2fd",
+                        "on-primary-fixed": "#00174b",
+                        "secondary-fixed-dim": "#4edea3",
+                        "tertiary-fixed": "#ffddb8",
+                        "on-primary-container": "#eeefff",
+                        "surface-container-high": "#222a3d",
+                        "inverse-primary": "#0053db",
+                        "on-primary": "#002a78",
+                        "surface-variant": "#2d3449",
+                        "outline-variant": "#434655",
+                        "on-surface": "#dae2fd",
+                        "on-error": "#690005",
+                        "inverse-surface": "#dae2fd",
+                        "secondary-container": "#00a572",
+                        "inverse-on-surface": "#283044",
+                        "surface-container-lowest": "#060e20",
+                        "primary-fixed": "#dbe1ff",
+                        "on-tertiary-container": "#ffeedd",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed": "#2a1700",
+                        "surface-tint": "#b4c5ff",
+                        "surface-container-highest": "#2d3449",
+                        "on-secondary-container": "#00311f",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-secondary": "#003824"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "display": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Editorial adjustments for Turkish text */
+        body {
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body overflow-hidden">
+<!-- SideNavBar from JSON Blueprint -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-6 gap-8 bg-[#171f33] dark:bg-[#171f33] font-['Inter'] leading-relaxed antialiased h-screen w-72 shrink-0 z-50">
+<!-- Header -->
+<div class="flex items-center gap-3 px-2">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container text-xl" style="font-variation-settings: 'FILL' 1;">
+                    space_dashboard
+                </span>
+</div>
+<div>
+<h1 class="text-lg font-black tracking-tighter text-[#b4c5ff] leading-none">Mini Üretkenlik</h1>
+<span class="text-[0.65rem] text-on-surface-variant uppercase tracking-widest mt-1 block">Luminous Void</span>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full bg-gradient-to-br from-[#2563eb] to-[#b4c5ff] text-[#00174b] font-bold rounded-lg py-3 px-4 flex items-center justify-center gap-2 hover:brightness-110 transition-all duration-300 shadow-[0_8px_16px_-6px_rgba(37,99,235,0.4)]">
+<span class="material-symbols-outlined text-[20px]">add</span>
+            Yeni Not
+        </button>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-2 mt-4 flex-1">
+<!-- Sayaç (Inactive) -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform duration-300">timer</span>
+<span class="font-medium text-sm">Sayaç</span>
+</a>
+<!-- Notlar (Active) -->
+<a class="flex items-center gap-3 px-4 py-3 bg-[#222a3d] text-[#b4c5ff] rounded-lg transition-all duration-300 scale-[0.98]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-bold text-sm">Notlar</span>
+</a>
+<!-- Geçmiş (Inactive) -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform duration-300">history</span>
+<span class="font-medium text-sm">Geçmiş</span>
+</a>
+<!-- Ayarlar (Inactive) -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform duration-300">settings</span>
+<span class="font-medium text-sm">Ayarlar</span>
+</a>
+</nav>
+<!-- Bottom User Area placeholder to match high-end feel -->
+<div class="mt-auto px-4 py-3 rounded-lg bg-surface-container-highest/50 flex items-center gap-3 border border-outline-variant/10">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface text-sm">person</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-on-surface">Kullanıcı Profili</span>
+</div>
+</div>
+</aside>
+<!-- Main Canvas Area -->
+<main class="ml-72 h-screen flex items-center justify-center relative bg-surface">
+<!-- Ambient Background Glow for "Luminous Void" effect -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-container/5 rounded-full blur-[100px] pointer-events-none"></div>
+<!-- Empty State Content Container -->
+<div class="flex flex-col items-center justify-center max-w-lg mx-auto p-12 text-center relative z-10">
+<!-- Icon Composition -->
+<div class="relative mb-10 group">
+<!-- Soft under-glow for icon -->
+<div class="absolute inset-0 bg-secondary/20 rounded-full blur-2xl transform group-hover:scale-110 transition-transform duration-700"></div>
+<div class="w-32 h-32 rounded-[2rem] bg-surface-container-low border border-outline-variant/20 shadow-[0_24px_48px_-12px_rgba(6,14,32,0.8)] flex items-center justify-center relative rotate-[-4deg] group-hover:rotate-0 transition-all duration-500 ease-out">
+<!-- Layered icons for depth -->
+<span class="material-symbols-outlined text-7xl text-surface-bright absolute -right-4 -bottom-2 opacity-50 blur-[2px]">
+                        sticky_note_2
+                    </span>
+<span class="material-symbols-outlined text-6xl text-primary" style="font-variation-settings: 'FILL' 1;">
+                        sticky_note_2
+                    </span>
+<!-- Decorative sparkle -->
+<span class="material-symbols-outlined text-secondary absolute top-4 right-4 text-sm" style="font-variation-settings: 'FILL' 1;">
+                        temp_preferences_custom
+                    </span>
+</div>
+</div>
+<!-- Typography (Editorial Hierarchy) -->
+<h2 class="text-display font-bold text-3xl md:text-4xl text-on-surface mb-4 tracking-tight">
+                Henüz not eklenmemiş.
+            </h2>
+<p class="text-body font-normal text-on-surface-variant text-base md:text-lg max-w-md mx-auto leading-relaxed mb-10">
+                Yeni bir not ekleyerek başlayabilirsiniz. Fikirlerinizi, görevlerinizi veya kısa hatırlatıcılarınızı burada toplayın.
+            </p>
+<!-- Inline Action (Ghost Button matching Minimalist aesthetic) -->
+<button class="group flex items-center gap-3 px-6 py-3 rounded-lg border border-outline-variant/20 text-primary hover:bg-surface-bright/20 hover:border-primary/40 transition-all duration-300">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform duration-300">
+                    edit_document
+                </span>
+<span class="font-medium">İlk Notunu Oluştur</span>
+</button>
+</div>
+</main>
+</body></html>

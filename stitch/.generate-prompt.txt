@@ -1,0 +1,238 @@
+# Mini Üretkenlik Paneli — Ürün Gereksinimleri Dokümanı (PRD)
+
+## 1. Genel Bakış
+
+Mini Üretkenlik Paneli, kullanıcıların günlük aktivitelerini takip etmelerine, notlar almalarına ve kendi tercihlerine göre uygulamayı özelleştirmelerine olanak tanıyan hafif bir web uygulamasıdır. Tek sayfalık (SPA) mimari ile çalışır, tüm ekranlar aynı sekme içinde sekmeli veya panel bazlı gezinmeyle sunulur. Hedef kitle: bireysel verimliliklerini basit araçlarla artırmak isteyen Türkçe konuşan kullanıcılar. Uygulama tamamen Türkçe arayüzle gelir; metin, buton etiketleri, yer tutucu (placeholder) ve hata mesajları Türkçedir.
+
+## 2. Hedefler
+
+1. Kullanıcıya anlık sayaç (counter) aracı sunarak tekrarlanan görevleri kolayca takip edebilmesini sağlamak.
+2. Notlar alma, listeleme, silme işlevlerini sorunsuz ve anlık sunmak.
+3. Yapılan her işlemi (sayacı artırma, azaltma, sıfırlama, not ekleme/silme) geçmiş panelinde kaydederek kullanıcıya görünürlük sağlamak.
+4. Açık/koyu tema geçişini ve uygulama verilerini temizleme seçeneklerini ayarlar ekranında toplamak.
+5. Tüm verilerin tarayıcı LocalStorage üzerinde kalıcı tutulmasını garanti ederek sayfa yenilendiğinde kaybolmamasını sağlamak.
+6. Mobil (320px+) ve masaüstü (1920px+) ekranlarda tam duyarlı (responsive) düzen sunmak.
+
+## 3. Tech Stack Detayı
+
+- **Framework:** React 18 (fonksiyonel bileşenler + Hooks)
+- **Build:** Vite 5.x (HMR, optimize üretim derlemesi)
+- **Dil:** TypeScript (katı tip denetimi, açık arayüz tanımları)
+- **Styling:** Tailwind CSS 3.4 (yardımcı sınıf tabanlı, responsive)
+- **State:** React useState + useReducer (merkezi state gerektirmeyen basit uygulama)
+- **Storage:** window.localStorage (persist); JSON serialize/deserialize
+- **Routing:** İç (client-side) sekme/panel geçişleri; React Router kullanılmaz (tek dosya mantığı)
+- **Icon Library:** Lucide React (tüm ikonlar buradan, emoji asla kullanılmaz)
+
+## 4. Fonksiyonel Gereksinimler
+
+### 4.1 Sayaç (Counter)
+- Sayacın başlangıç değeri 0’dır.
+- “Artır” butonu: mevcut değeri +1 yapar.
+- “Azalt” butonu: mevcut değeri −1 yapar; negatif değerlere düşebilir.
+- “Sıfırla” butonu: kullanıcıdan onay almadan çalışmaz.
+  - Onay modalı başlığı: “Sayacı Sıfırla”
+  - Açıklama: “Sayacı sıfırlamak istediğinize emin misiniz? Bu işlem geri alınamaz.”
+  - Butonlar: “İptal” (iptal eder), “Sıfırla” (onaylar)
+- Her işlem (artır, azalt, sıfırla) otomatik olarak geçiş kaydına yazılır.
+
+### 4.2 Notlar
+- “Not Ekle” alanı: çok satırlı bir metin girişi (textarea).
+  - Placeholder: “Notunuzu yazın...”
+  - “Ekle” butonu ile kaydedilir.
+- Eklenen notlar kronolojik sırada (en yeni üstte) listelenir.
+- Her not satırında:
+  - Not metni (tamamı görünür, 3 satırdan uzunsa clamp ile kısal)
+  - Ekleme tarihi/saati (örnek: “27 Nisan 2026, 14:35”)
+  - “Sil” butonu (çöp kutusu ikonu, Lucide Trash2)
+- Silme işlemi onay sorusu içermez (kullanıcı dostu hızlı eylem).
+- Not listesi boşsa boş durum mesajı gösterilir: “Henüz not eklenmemiş.”
+
+### 4.3 Geçmiş (History)
+- Otomatik olarak sayaç ve notlar ekranlarındaki her işlemi kaydeder.
+- Kayıt yapısı: { id, actionType: 'counter_increment' | 'counter_decrement' | 'counter_reset' | 'note_add' | 'note_delete' | 'history_clear', detail: string, timestamp: string }
+- Geçmiş listesi en yeni kayıt üstte olacak şekilde sıralanır.
+- “Geçmişi Temizle” butonu tüm kayıtları siler; onay modalı gösterilir.
+  - Modal başlığı: “Geçmişi Temizle”
+  - Açıklama: “Tüm geçmiş kayıtlarını silmek istediğinize emin misiniz? Bu işlem geri alınamaz.”
+  - Butonlar: “İptal”, “Temizle”
+- Geçmiş boşsa: “Henüz bir işlem yapılmamış.” mesajı gösterilir.
+
+### 4.4 Ayarlar (Settings)
+- Tema Değiştir: Açık/Koyu (Light/Dark) toggle anahtarı.
+  - Varsayılan: sistem teması (prefers-color-scheme) takip edilir; ilk kullanımda tespit edilir.
+  - Seçim localStorage’da saklanır.
+- “Tüm Verileri Temizle” butonu:
+  - Modal onayı ile çalışır.
+  - Başlık: “Tüm Verileri Sil”
+  - Açıklama: “Sayacı, notları ve geçmişi kalıcı olarak silmek istediğinize emin misiniz?”
+  - Butonlar: “İptal”, “Sil”
+- Uygulama hakkında kısa bilgi: sürüm, depo bağlantısı (isteğe bağlı).
+
+## 5. Veri Modeli
+
+### 5.1 localStorage Schema
+
+```typescript
+// localStorage anahtarları
+const STORAGE_KEYS = {
+  counter: 'up_counter',
+  notes: 'up_notes',
+  history: 'up_history',
+  settings: 'up_settings',
+};
+
+// Tipler
+interface CounterState {
+  value: number;
+}
+
+interface Note {
+  id: string;        // crypto.randomUUID() veya Date.now()
+  content: string;
+  createdAt: string; // ISO 8601
+}
+
+interface HistoryEntry {
+  id: string;
+  actionType: 'counter_increment' | 'counter_decrement' | 'counter_reset' | 'note_add' | 'note_delete' | 'history_clear';
+  detail: string;    // kullanıcıya okunabilir açıklama
+  timestamp: string; // ISO 8601
+}
+
+interface Settings {
+  theme: 'light' | 'dark' | 'system';
+}
+```
+
+### 5.2 İlişkiler
+- Counter, Notes, History bağımsız koleksiyonlardır (ilişkisel veri yok).
+- History her işlem sonrası otomatik doldurulur; diğer koleksiyonlara bağımlı değildir.
+
+## 6. UI/UX Gereksinimleri
+
+### 6.1 Design System Seçimi
+
+- **Aesthetic:** minimal
+- **Renk Paleti:**
+  - Primary: #2563EB (Mavi — ana eylemler, aktif sekme)
+  - Secondary: #10B981 (Yeşil — başarı durumları)
+  - Background: #F8FAFC (Light arka plan) / #0F172A (Dark arka plan)
+  - Surface: #FFFFFF (Light kart) / #1E293B (Dark kart)
+  - Text Primary: #0F172A (Light) / #F1F5F9 (Dark)
+  - Text Secondary: #64748B (Light) / #94A3B8 (Dark)
+  - Border: #E2E8F0 (Light) / #334155 (Dark)
+  - Success: #10B981
+  - Error: #EF4444
+  - Warning: #F59E0B
+- **Tipografi:**
+  - Heading: Inter (600, 700)
+  - Body: Inter (400, 500)
+- **Icon Library:** Lucide React
+
+### 6.2 Spacing & Components
+
+- **Spacing Scale:** 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 px
+- **Border Radius:**
+  - Butonlar: 8 px
+  - Kartlar: 12 px
+  - Modal: 16 px
+  - Input/textarea: 8 px
+- **Shadow:**
+  - Kart: `0 1px 3px rgba(0,0,0,0.1)`
+  - Modal overlay: arka plan `rgba(0,0,0,0.5)` + modal `0 10px 25px rgba(0,0,0,0.2)`
+- **Buton Patternleri:**
+  - Birincil: dolgu rengi (bg-primary, text-white)
+  - İkincil/Tehlike: çerçeve (border) veya düz (ghost)
+  - Devre dışı: opacity-50 + cursor-not-allowed
+- **Form Patternleri:**
+  - Input/textarea: border + focus:ring-2 focus:ring-primary
+  - Etiketler üstte, 4 px boşluk
+
+## 7. Non-Functional Requirements
+
+### 7.1 Performans
+- İlk yükleme < 2 saniye (3G bağlantıda bile)
+- Sayfa/panel geçişi < 100 ms (render-blocking olmamalı)
+- Bundle boyutu hedefi: < 200 KB (gzip) — Vite + React + Tailwind + Lucide
+
+### 7.2 Erişilebilirlik (WCAG 2.1 AA)
+- Tüm etkileşimli elemanlar klavye ile erişilebilir (Tab sırası mantıklı).
+- Butonlar, inputlar ve modal üzerinde ARIA label tanımlı.
+- Ekran okuyucu uyumlu: `aria-label`, `aria-describedby`, `role="dialog"` modal için.
+- Kontrast oranı:
+  - Normal metin >= 4.5:1
+  - Büyük metin/buton >= 3:1
+- Focus state tüm buton, input ve linklerde belirgin (ring-2 ring-offset-2).
+- Dokunma hedefleri minimum 44 x 44 px.
+
+### 7.3 Tarayıcı Desteği
+- Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+- iOS Safari 14+, Android Chrome 90+
+- Responsive aralık: 320 px → 1920 px+
+- Mobil düzende alt sekme çubuğu; masaüstünde yan sekme çubuğu veya üst gezinme çubuğu.
+
+## 8. Proje Yapısı
+
+```
+src/
+├── components/
+│   ├── Button.tsx
+│   ├── Card.tsx
+│   ├── ConfirmModal.tsx
+│   ├── EmptyState.tsx
+│   ├── HistoryItem.tsx
+│   ├── NoteItem.tsx
+│   └── ThemeToggle.tsx
+├── screens/
+│   ├── SayacEkrani.tsx        (Counter screen)
+│   ├── NotlarEkrani.tsx     (Notes screen)
+│   ├── GecmisEkrani.tsx     (History screen)
+│   └── AyarlarEkrani.tsx    (Settings screen)
+├── hooks/
+│   ├── useLocalStorage.ts
+│   └── useTheme.ts
+├── utils/
+│   ├── storage.ts
+│   └── formatters.ts
+├── types/
+│   └── index.ts
+├── App.tsx
+└── main.tsx
+```
+
+## 9. Window State (Testing / Dogfood)
+
+```typescript
+window.app = {
+  state: 'idle',
+  counter: 0,
+  notesCount: 0,
+  historyCount: 0,
+  theme: 'system',
+};
+```
+
+Bu nesne, tarayıcı konsolundan uygulama durumunu gözlemlemek ve otomatik testlerde doğrulama yapmak için kullanılır.
+
+## 10. Ekranlar
+
+| # | Ekran Adı | Tür | Açıklama |
+|---|-----------|-----|----------|
+| 1 | Sayac | dashboard | Merkezi sayaç göstergesi, artır/azalt/sıfırla butonları, son işlemler özeti |
+| 2 | Notlar | list | Not ekleme formu, mevcut notlar listesi (tarih + sil), boş durum desteği |
+| 3 | Geçmiş | list | Yapılan tüm işlemlerin zaman damgalı listesi, geçmişi temizle butonu, boş durum |
+| 4 | Ayarlar | form | Tema değiştirme toggle, tüm verileri sil butonu, uygulama bilgisi |
+| 5 | Onay Modalı | modal | Sayacı sıfırla / geçmişi temizle / tüm verileri sil onay diyalogu |
+| 6 | Boş Durum (Global) | empty-state | Herhangi bir listede veri yokken gösterilen illüstrasyon + metin |
+
+Generate a SEPARATE screen design for EVERY page, view, modal, dialog, tab panel, and settings screen described in this PRD. Do NOT skip ANY screen — even if it seems minor.
+
+MANDATORY SCREENS:
+- If the PRD mentions "settings" or "ayarlar" → generate a Settings screen
+- If the PRD mentions tabs or bottom navigation → generate EACH tab view as a separate screen
+- If the PRD mentions modals (statistics, help, share, confirmation) → generate each as a separate screen
+- If the PRD mentions error states, empty states, loading states → generate those too
+- Generate at least as many screens as there are distinct views/pages/modals in the PRD
+
+All visible text must be in Turkish. Use a dark, modern theme.

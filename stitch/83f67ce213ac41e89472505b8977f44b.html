@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tüm Verileri Sil - Mini Üretkenlik Paneli</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "surface-bright": "#31394d",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-secondary-fixed-variant": "#005236",
+                        "tertiary-container": "#996100",
+                        "surface-container": "#171f33",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "tertiary": "#ffb95f",
+                        "outline": "#8d90a0",
+                        "on-secondary-fixed": "#002113",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#472a00",
+                        "primary-container": "#2563eb",
+                        "surface": "#0b1326",
+                        "surface-dim": "#0b1326",
+                        "surface-container-low": "#131b2e",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "background": "#0b1326",
+                        "primary": "#b4c5ff",
+                        "secondary": "#4edea3",
+                        "on-background": "#dae2fd",
+                        "on-primary-fixed": "#00174b",
+                        "secondary-fixed-dim": "#4edea3",
+                        "tertiary-fixed": "#ffddb8",
+                        "on-primary-container": "#eeefff",
+                        "surface-container-high": "#222a3d",
+                        "inverse-primary": "#0053db",
+                        "on-primary": "#002a78",
+                        "surface-variant": "#2d3449",
+                        "outline-variant": "#434655",
+                        "on-surface": "#dae2fd",
+                        "on-error": "#690005",
+                        "inverse-surface": "#dae2fd",
+                        "secondary-container": "#00a572",
+                        "inverse-on-surface": "#283044",
+                        "surface-container-lowest": "#060e20",
+                        "primary-fixed": "#dbe1ff",
+                        "on-tertiary-container": "#ffeedd",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed": "#2a1700",
+                        "surface-tint": "#b4c5ff",
+                        "surface-container-highest": "#2d3449",
+                        "on-secondary-container": "#00311f",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-secondary": "#003824"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "display": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen antialiased flex flex-col">
+<!-- Mock Background Content (Blurred out) -->
+<div class="fixed inset-0 z-0 bg-surface blur-sm opacity-50 flex items-center justify-center pointer-events-none">
+<div class="w-full max-w-4xl p-8 grid gap-8">
+<div class="h-64 bg-surface-container rounded-xl w-full"></div>
+<div class="grid grid-cols-2 gap-8">
+<div class="h-48 bg-surface-container rounded-xl"></div>
+<div class="h-48 bg-surface-container rounded-xl"></div>
+</div>
+</div>
+</div>
+<!-- Modal Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-surface-container-lowest/80 backdrop-blur-md">
+<!-- Modal Container -->
+<div class="w-full max-w-md bg-surface-container-low rounded-[16px] shadow-[0_24px_48px_-12px_rgba(6,14,32,0.4)] relative overflow-hidden ring-1 ring-outline-variant/20">
+<!-- Modal Header -->
+<div class="p-6 pb-0 flex flex-col items-center text-center space-y-4">
+<div class="w-16 h-16 rounded-full bg-error-container/20 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-error text-4xl" data-icon="error" style="font-variation-settings: 'FILL' 1;">error</span>
+</div>
+<h2 class="text-[1.5rem] leading-[1.2] font-headline font-bold text-on-surface tracking-tight">
+                    Tüm Verileri Sil
+                </h2>
+</div>
+<!-- Modal Body -->
+<div class="p-6 text-center">
+<p class="text-[0.875rem] leading-[1.5] text-on-surface-variant font-body px-4">
+                    Sayacı, notları ve geçmişi kalıcı olarak silmek istediğinize emin misiniz? Bu işlem geri alınamaz.
+                </p>
+</div>
+<!-- Modal Footer (Actions) -->
+<div class="p-6 pt-2 flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 justify-center">
+<button class="w-full sm:w-auto px-6 py-3 rounded-lg font-label text-[0.875rem] font-medium text-primary bg-transparent hover:bg-surface-bright/50 transition-colors duration-200">
+                    İptal
+                </button>
+<button class="w-full sm:w-auto px-6 py-3 rounded-lg font-label text-[0.875rem] font-medium text-on-error bg-error hover:brightness-105 transition-all duration-200 shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="delete" style="font-variation-settings: 'FILL' 1;">delete</span>
+                    Sil
+                </button>
+</div>
+<!-- Bottom decorative accent -->
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-error/0 via-error to-error/0 opacity-50"></div>
+</div>
+</div>
+</body></html>
