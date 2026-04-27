@@ -9,9 +9,12 @@
 
 import { useState } from "react";
 
-interface GecmisEkraniProps {}
+interface GecmisEkraniProps {
+  onNavigate?: (screen: string) => void;
+}
 
 export function GecmisEkrani(props: GecmisEkraniProps) {
+  const { onNavigate } = props;
   return (
     <>
       {/* SideNavBar */}
@@ -29,25 +32,37 @@ export function GecmisEkrani(props: GecmisEkraniProps) {
       {/* Navigation Tabs */}
       <nav className="flex flex-col gap-1 mt-4">
       {/* Sayaç (Inactive) */}
-      <a className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg" href="#">
-      <span className="material-symbols-outlined" data-icon="timer">timer</span>
-      <span className="font-medium">Sayaç</span>
-      </a>
+      <button
+        type="button"
+        onClick={() => onNavigate?.('counter')}
+        className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg text-left cursor-pointer"
+      >
+        <span className="material-symbols-outlined" data-icon="timer">timer</span>
+        <span className="font-medium">Sayaç</span>
+      </button>
       {/* Notlar (Inactive) */}
-      <a className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg" href="#">
-      <span className="material-symbols-outlined" data-icon="description">description</span>
-      <span className="font-medium">Notlar</span>
-      </a>
+      <button
+        type="button"
+        onClick={() => onNavigate?.('notes')}
+        className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg text-left cursor-pointer"
+      >
+        <span className="material-symbols-outlined" data-icon="description">description</span>
+        <span className="font-medium">Notlar</span>
+      </button>
       {/* Geçmiş (Active) */}
-      <a className="flex items-center gap-3 px-4 py-3 bg-[#222a3d] text-[#b4c5ff] rounded-lg transition-all duration-300 scale-[0.98]" href="#">
-      <span className="material-symbols-outlined" data-icon="history" style={{fontVariationSettings: "'FILL' 1"}}>history</span>
-      <span className="font-bold">Geçmiş</span>
+      <a className="flex items-center gap-3 px-4 py-3 bg-[#222a3d] text-[#b4c5ff] rounded-lg transition-all duration-300 scale-[0.98]" href="#history">
+        <span className="material-symbols-outlined" data-icon="history" style={{fontVariationSettings: "'FILL' 1"}}>history</span>
+        <span className="font-bold">Geçmiş</span>
       </a>
       {/* Ayarlar (Inactive) */}
-      <a className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg" href="#">
-      <span className="material-symbols-outlined" data-icon="settings">settings</span>
-      <span className="font-medium">Ayarlar</span>
-      </a>
+      <button
+        type="button"
+        onClick={() => onNavigate?.('settings')}
+        className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg text-left cursor-pointer"
+      >
+        <span className="material-symbols-outlined" data-icon="settings">settings</span>
+        <span className="font-medium">Ayarlar</span>
+      </button>
       </nav>
       <div className="mt-auto px-2">
       <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-br from-primary-container to-primary text-on-primary-container rounded-lg font-bold hover:brightness-105 transition-all duration-300 shadow-[0_8px_24px_-8px_rgba(37,99,235,0.4)]">

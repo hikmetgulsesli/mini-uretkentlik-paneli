@@ -9,9 +9,12 @@
 
 import { useState } from "react";
 
-interface AyarlarEkraniProps {}
+interface AyarlarEkraniProps {
+  onNavigate?: (screen: string) => void;
+}
 
 export function AyarlarEkrani(props: AyarlarEkraniProps) {
+  const { onNavigate } = props;
   return (
     <>
       {/* JSON Component: SideNavBar */}
@@ -34,24 +37,36 @@ export function AyarlarEkrani(props: AyarlarEkraniProps) {
       {/* Navigation Links */}
       <div className="flex flex-col gap-2 mt-4 flex-1">
       {/* Inactive Tab 1 */}
-      <a className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg group" href="#">
-      <span className="material-symbols-outlined group-hover:scale-110 transition-transform">timer</span>
-      <span className="font-medium">Sayaç</span>
-      </a>
+      <button
+        type="button"
+        onClick={() => onNavigate?.('counter')}
+        className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg group text-left cursor-pointer"
+      >
+        <span className="material-symbols-outlined group-hover:scale-110 transition-transform">timer</span>
+        <span className="font-medium">Sayaç</span>
+      </button>
       {/* Inactive Tab 2 */}
-      <a className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg group" href="#">
-      <span className="material-symbols-outlined group-hover:scale-110 transition-transform">description</span>
-      <span className="font-medium">Notlar</span>
-      </a>
+      <button
+        type="button"
+        onClick={() => onNavigate?.('notes')}
+        className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg group text-left cursor-pointer"
+      >
+        <span className="material-symbols-outlined group-hover:scale-110 transition-transform">description</span>
+        <span className="font-medium">Notlar</span>
+      </button>
       {/* Inactive Tab 3 */}
-      <a className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg group" href="#">
-      <span className="material-symbols-outlined group-hover:scale-110 transition-transform">history</span>
-      <span className="font-medium">Geçmiş</span>
-      </a>
+      <button
+        type="button"
+        onClick={() => onNavigate?.('history')}
+        className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 transition-colors hover:bg-[#222a3d]/50 hover:brightness-105 rounded-lg group text-left cursor-pointer"
+      >
+        <span className="material-symbols-outlined group-hover:scale-110 transition-transform">history</span>
+        <span className="font-medium">Geçmiş</span>
+      </button>
       {/* Active Tab 4 */}
-      <a className="flex items-center gap-3 px-4 py-3 bg-[#222a3d] text-[#b4c5ff] rounded-lg transition-all duration-300 scale-[0.98]" href="#">
-      <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>settings</span>
-      <span className="font-medium">Ayarlar</span>
+      <a className="flex items-center gap-3 px-4 py-3 bg-[#222a3d] text-[#b4c5ff] rounded-lg transition-all duration-300 scale-[0.98]" href="#settings">
+        <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>settings</span>
+        <span className="font-medium">Ayarlar</span>
       </a>
       </div>
       {/* User Profile Area (Bottom) */}
