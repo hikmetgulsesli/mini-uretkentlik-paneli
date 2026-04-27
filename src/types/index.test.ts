@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
-import { useLocalStorage } from '../src/hooks/useLocalStorage';
-import { getStorageItem, setStorageItem, removeStorageItem } from '../src/utils/storage';
-import { formatTurkishDateTime } from '../src/utils/formatters';
-import type { CounterState, Note, HistoryEntry, Settings, AppState } from '../src/types';
-import { STORAGE_KEYS } from '../src/types';
+import { useLocalStorage } from '../hooks/useLocalStorage';
+import { getStorageItem, setStorageItem, removeStorageItem } from '../utils/storage';
+import { formatTurkishDateTime } from '../utils/formatters';
+import type { CounterState, Note, HistoryEntry, Settings, AppState } from './index';
+import { STORAGE_KEYS } from './index';
 
 describe('Tipler (Types)', () => {
   it('STORAGE_KEYS sabitleri doğru değerler içerir', () => {
