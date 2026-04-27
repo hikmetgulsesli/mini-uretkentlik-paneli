@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CounterDisplay } from '../components/CounterDisplay';
 import { formatTurkishDateTime } from '../utils/formatters';
 import { STORAGE_KEYS } from '../types';
@@ -38,6 +38,12 @@ export function SayacEkrani({ onNavigate }: SayacEkraniProps) {
   const refreshHistory = () => {
     setHistory(getRecentHistory());
   };
+
+  useEffect(() => {
+    const handleHistoryUpdate = () => refreshHistory();
+    window.addEventListener('history-update', handleHistoryUpdate);
+    return () => window.removeEventListener('history-update', handleHistoryUpdate);
+  }, []);
 
   return (
     <>

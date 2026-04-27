@@ -37,6 +37,14 @@ function addHistoryEntry(entry: HistoryEntry): void {
   }
 }
 
+function dispatchHistoryUpdate(): void {
+  try {
+    window.dispatchEvent(new Event('history-update'));
+  } catch {
+    // Ignore if window is not available (e.g. SSR)
+  }
+}
+
 export function useCounter(): UseCounterReturn {
   const [value, setValue] = useLocalStorage<number>(STORAGE_KEYS.COUNTER, 0);
 
@@ -44,6 +52,7 @@ export function useCounter(): UseCounterReturn {
     setValue((prev) => {
       const next = prev + 1;
       addHistoryEntry(createHistoryEntry('increment', next, 'Sayaç artırıldı'));
+      dispatchHistoryUpdate();
       return next;
     });
   }, [setValue]);
@@ -52,6 +61,7 @@ export function useCounter(): UseCounterReturn {
     setValue((prev) => {
       const next = prev - 1;
       addHistoryEntry(createHistoryEntry('decrement', next, 'Sayaç azaltıldı'));
+      dispatchHistoryUpdate();
       return next;
     });
   }, [setValue]);
@@ -59,6 +69,7 @@ export function useCounter(): UseCounterReturn {
   const reset = useCallback(() => {
     setValue(0);
     addHistoryEntry(createHistoryEntry('reset', 0, 'Sayaç sıfırlandı'));
+    dispatchHistoryUpdate();
   }, [setValue]);
 
   return {
